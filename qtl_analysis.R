@@ -1,10 +1,13 @@
-rm(list = ls())    # clear all variables in ym environment. 
-#install.packages("qtl")
-library(qtl)
-setwd("/home/data/4.QTL_Analysis/")
-#listeria = read.cross("csv", ".", file = "listeria.csv",genotypes = c('A', 'H', 'B', 'C'), na.strings = "-")
-data("listeria")
+rm(list = ls())    # clear all variables in working environment. 
 
+#install.packages("qtl")
+#install.packages("vioplot")
+library(qtl)
+library(vioplot)
+
+setwd("/home/data/4.QTL_Analysis/")
+listeria = read.cross("csv", ".", file = "listeria.csv",genotypes = c('A', 'H', 'B', 'C'), na.strings = "-")
+#data("listeria")
 ## knowing your data
   #jittermap(listeria)
   summary(listeria)
@@ -20,6 +23,7 @@ data("listeria")
   table(listeria$pheno$T264)
 
 plot(listeria, pheno.col = c(1))
+plotMissing(listeria)
 plot.map(listeria)
 #plot(listeria, pheno.col = c(1, 2))
 
@@ -28,16 +32,19 @@ plot.map(listeria)
 ## missing genotypes shows a lot of missing data on each marker, which is okay. 
 ## the histogram shows frequency of values for column T264. There are 35 values which are 264 exactly. 
 
-# To save graphs
+# How to To save graphs
 jpeg("genetic_map.jpeg")
 plot.map(listeria)
 graphics.off()
 
-#install.packages("vioplot")
-library(vioplot)
-vioplot((listeria$pheno$T264), xlab = "sex", ylab = "T264", names = "female")
-lines(c(0.75, 1.25), c(100,100), col = "blue", lwd = "5")
-lines(c(0.75, 1.25), c(264,264), col = "salmon", lwd = "5")
+#median(as.vector(listeria$pheno$T264), na.rm = TRUE)
+#mean(as.vector(listeria$pheno$T264), na.rm = TRUE)
+
+vioplot((listeria$pheno$T264), xlab = "sex", ylab = "T264", names = "female", main = "Distribution of Phenotype T264")
+# if both gender present we can make dual violin plots
+#vioplot((listeria$pheno$T264)~listeria$pheno$sex, xlab = "sex", ylab = "T264", names= c("female", "male"), main ="T264 expression for females")
+lines(c(0.75, 1.25), c(116.5,116.5), col = "blue", lwd = "5")    # based on median
+lines(c(0.75, 1.25), c(153.8,153.8), col = "salmon", lwd = "5")    #based on mean
 # Violin plot is just a histogram but turned 90 degrees. 
 
 estimated_map = est.map(listeria)
@@ -54,14 +61,15 @@ plotRF(listeria)
 
 ## IN TERMS OF DIAGNOSTICS - CALCULATE LOG SCORES. -- Read more about lod scores. 
 listeria = calc.errorlod(listeria, error.prob = 0.01) ## look at genotypes and ask if are there any ones that look like they might have statistical error of probabiltiy of 0.01 error 
-top.errorlod(listeria, cutoff = 4)
+top.errorlod(listeria, cutoff = 5)
 
 #plotGeno(listeria, chr = 1)
-plotGeno(listeria, chr = 3, include.xo = FALSE, ind = 1:30)
+plotGeno(listeria, chr = 5, include.xo = FALSE, ind = 1:30, cutoff = 1, min.sep = 2, cex = 0.8)
 
   ## Marker Genotypes
-  geno.image(listeria, chr=1)
-  geno.image(subset(listeria, ind = 1:100), chr = 1)    
+  geno.image(listeria, chr=5)
+  geno.image(subset(listeria, ind = 1:100), chr = 5, main = "Grid Plot For Genotype Data")
+  
   # vertically check what is the probability of having a geneotype near that loci.
   # Each color is a genotype. (We have A,B,C,H -- four colors.)
 #  plot(listeria$pheno$T264)    # scatter plot
@@ -90,7 +98,7 @@ abline(h = threshold1[3], lty = "dotted", lwd = 1, col = "green")
 ## So what does the above plot say -- We have a pretty big QTL on chromosome 5, chromosome 13 and chromosome 15, that is causing effects on T264 phenotype
 
 ## Get a summary of all this data
-summary(listeria.scan1, perms = listeria.scan1.perm, lodcolumn = 1, alpha = 0.68)
+summary(listeria.scan1, perms = listeria.scan1.perm, lodcolumn = 1, alpha = 0.66)
 summary(listeria.scan1, perms = listeria.scan1.perm, lodcolumn = 1, alpha = 0.20)
 summary(listeria.scan1, perms = listeria.scan1.perm, lodcolumn = 1, alpha = 0.10)
 # Chromosome 1,5,6,12,13,15 have some information, And the high lod scores are present on c5.loc28 , D13M147 markers
