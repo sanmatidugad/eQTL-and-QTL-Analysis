@@ -7,17 +7,24 @@ This repository contains my comprehensive notes and resources for understanding 
 2. https://cran.r-project.org/web/packages/qtl/qtl.pdf
 3. https://rqtl.org/tutorials/
 
-#### Graphs
+#### Example Graphs
 1. Missing Genotypes \
 ![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/missing_genotypes.png)
 
-2. Summary Plot \
-![alt text](
+2. Genetic Map \
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/genetic_map.png)
 
-3. Genetic Map \
-4. Comparing Genetic Maps (Estomated v/s Observed) \
-5. Pairwise Recombination Factor and LOD distribution \
-6. Observed Genotype for Chromosome 5 \
-7. Grid Distribution of for Observed Genotype \
-8. Genome Scan with a single QTL model \
-9. Effect Plot (Phenotype Mean versus Genotype \
+3. Comparing Genetic Maps (Estimated v/s Observed) \
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/comparing_genetic_maps.png)
+4. Pairwise Recombination Factor and LOD distribution \
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/rf_and_LOD_correlation_plot.png)
+5. Observed Genotype for Chromosome 5 \
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/observed_genotype_plot_chr5.png)
+6. Grid Distribution of for Observed Genotype \
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/grid_genotype_plot.png)
+7. Genome Scan with a single QTL model \
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/main_scan_plot_T264.png)
+8. Effect Plot (Phenotype Mean versus Genotype \
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/effectplot_D5M357.png)
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/effectplot_D13M147.png)
+![alt text](https://github.com/sanmatidugad/eQTL-and-QTL-Analysis/blob/main/QTL_example_plots/effectplot_D6M15.png)
